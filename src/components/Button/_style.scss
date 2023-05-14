@@ -1,0 +1,66 @@
+.mq-btn {
+  position: relative;
+  display: inline-block;
+  font-weight: $btn-font-weight;
+  line-height: $btn-line-height;
+  color: $body-color;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  border: $btn-border-width solid transparent;
+  @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-border-radius);
+  box-shadow: $btn-box-shadow;
+  cursor: pointer;
+  transition: $btn-transition;
+  &.disabled, &[disabled] {
+    cursor: not-allowed;
+    opacity: $btn-disabled-opacity;
+    box-shadow: none;
+    > * {
+      pointer-events: none;
+    }
+  }
+}
+
+.mq-btn-lg {
+  @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-border-radius-lg);
+}
+
+.mq-btn-sm {
+  @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-border-radius-sm);
+}
+
+.mq-btn-primary {
+  @include button-style($blue, $blue, $white)
+}
+
+.mq-btn-danger {
+  @include button-style($danger, $danger, $white)
+}
+
+.mq-btn-default {
+  @include button-style($white, $primary, $gray-900, #fff,$cyan, $blue)
+}
+
+.mq-btn-link {
+  &:not([href]) {
+    font-weight: $font-weight-normal;
+    color: $btn-link-color;
+    text-decoration: $link-decoration;
+    box-shadow: none;
+    &:hover {
+      color: $btn-link-hover-color;
+      text-decoration: $link-decoration;
+    }
+    &:focus, &.focus {
+      color: $btn-link-hover-color;
+      box-shadow: none;
+    }
+    &.disabled, &[disabled] {
+      color: $btn-link-disabled-color;
+      text-decoration: $link-decoration;
+      box-shadow: none;
+      pointer-events: none;
+    }
+  } 
+}

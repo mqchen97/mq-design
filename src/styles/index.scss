@@ -1,0 +1,16 @@
+//scss 从上到下加载
+
+// config
+@import "variables";
+
+// layout
+@import "reboot";
+
+// mixin
+@import "mixin";
+
+// btn
+@import '../components/Button/style';
+
+//menu
+@import '../components/Menu/style';
