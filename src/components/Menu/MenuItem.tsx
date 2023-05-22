@@ -18,9 +18,7 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
     style,
     children,
     disabled,
-    key
   } = props;
-  console.log('key', key);
   const context = useContext(MenuContext)
   const { active, onSelect } = context
   const classes = classNames('mq-Menu-Item', className, {
@@ -29,7 +27,6 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
   })
   const handleClick = (index: string | undefined) => {
     if (onSelect && !disabled && (typeof index === 'string')) {
-      console.log('index', index);
       onSelect(index)
     }
   }

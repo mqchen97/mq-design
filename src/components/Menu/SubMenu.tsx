@@ -1,9 +1,12 @@
 import React, { ReactNode, useContext, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { CSSTransition } from 'react-transition-group'
 import classNames from "classnames";
 import { MenuContext } from './Menu'
 import { MenuItemProps } from './MenuItem'
+import Icon from "../Icon/Icon";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons'
+library.add(fas)
 
 export interface SubMenuProps {
   className?: string;
@@ -21,7 +24,9 @@ const SubMenu: React.FC<SubMenuProps> = ({ className, title, index, children, ke
   const [subOpen, setSubOpen] = useState(isOpen)
   const classes = classNames('mq-Menu-Item mq-SubMenu-Item', className,
     {
-      'is-active': index === active
+      'is-active': index === active,
+      'is-opened': subOpen,
+      'is-vertical': context.mode === 'vertical'
     }
   );
 
@@ -67,16 +72,24 @@ const SubMenu: React.FC<SubMenuProps> = ({ className, title, index, children, ke
     })
 
     return (
-      <ul className={subMenuClasses}>
-        {childremComponents}
-      </ul>
+      <CSSTransition
+        in={subOpen}
+        timeout={200}
+        classNames='zoom-in-top'
+        appear
+        unmountOnExit
+      >
+        <ul className={subMenuClasses}>
+          {childremComponents}
+        </ul>
+      </CSSTransition>
     )
   }
   return (
     <li key={index} className={classes} {...ClickEvent} {...HoverEvent}>
       <div className="submenu-title" >
         {title}
-        <FontAwesomeIcon icon={faAngleUp}></FontAwesomeIcon>
+        <Icon icon='angle-up' className="arrow-icon"></Icon>
       </div>
       {renderChildren()}
     </li>
